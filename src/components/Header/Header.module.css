@@ -1,7 +1,16 @@
-.headerLeft{
-  text-align: center;
-  padding: 2em;
-  /* border-bottom: 1px black solid; */
+.headerLeft .logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.headerLeft img{
+  width: 250px;
+}
+
+.headerLeft img:nth-child(2){
+  width: 180px;
 }
 
 .logo {

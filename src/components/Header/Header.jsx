@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 function Header() {
   return (
-    <div className="header">
+    <div className={styles.header}>
       <div className={styles.headerLeft}>
         <Link to="/" className={styles.logo}>
-          Where is Waldo ?
+          <img src="logo.png" alt="waldo" />
+          <img src="waldo_logo.jpg" alt="logo of waldo" />
         </Link>
       </div>
     </div>
