@@ -1,0 +1,12 @@
+.headerLeft{
+  text-align: center;
+  padding: 2em;
+  /* border-bottom: 1px black solid; */
+}
+
+.logo {
+  font-size: 2.5rem;
+  text-decoration: none;
+}
+
+
