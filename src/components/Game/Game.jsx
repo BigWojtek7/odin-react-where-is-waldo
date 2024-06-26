@@ -3,21 +3,26 @@ import styles from './Game.module.css';
 
 function Game() {
   const menuBoxRef = useRef(null);
+  const circleRef = useRef(null);
 
   const toggleMenu = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (
       menuBoxRef.current.style.display == 'none' ||
       !menuBoxRef.current.style.display
     ) {
       menuBoxRef.current.style.display = 'block';
-      
-      menuBoxRef.current.style.top = e.clientY + "px";
-      menuBoxRef.current.style.left = e.clientX + "px";
-      // alert(`x:${e.clientX}, y: ${e.clientY}`)
-      // console.log('walter', e.clientY);
+      circleRef.current.style.display = 'block';
+
+      menuBoxRef.current.style.top = e.clientY + 'px';
+      menuBoxRef.current.style.left = e.clientX + 'px';
+
+      circleRef.current.style.top = e.clientY + 'px';
+      circleRef.current.style.left = e.clientX + 'px';
+
     } else {
       menuBoxRef.current.style.display = 'none';
+      circleRef.current.style.display = 'none';
     }
   };
 
@@ -31,10 +36,17 @@ function Game() {
           alt="Waldo in the beach"
         />
         <ul className={styles.menuBox} ref={menuBoxRef}>
-          <li>Waldo</li>
-          <li>The wizard</li>
-          <li>Odlaw</li>
+          <li>
+            <button>Waldo</button>
+          </li>
+          <li>
+            <button>The wizard</button>
+          </li>
+          <li>
+            <button>Odlaw</button>
+          </li>
         </ul>
+        <div className={styles.circle} ref={circleRef}></div>
       </div>
     </div>
   );
