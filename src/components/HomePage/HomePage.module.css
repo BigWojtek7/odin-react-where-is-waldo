@@ -1,19 +1,42 @@
-/* .homePage {
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-} */
+
 .menu {
   display: flex;
   padding: 2em;
   gap: 1em;
   justify-content: center;
   font-size: 1.2rem;
+  
 }
 
-button{
-  padding: 5px;
+.menu button{
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
   cursor: pointer;
+  background-color: #ff0000;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  background-color: #5b92e5;
 }
+
+.menu button:hover{
+  background-color: #ff0000;
+  transition: 0.2s;
+}
+
+.characters{
+  color: #ff0000;
+  text-align: center;
+  
+}
+.images{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;;
+  gap: 50px;
+}
+.images img{
+  height: 250px;
+}
+

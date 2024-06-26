@@ -1,3 +1,7 @@
+.header{
+  background-color: red;
+}
+
 .headerLeft .logo{
   display: flex;
   justify-content: center;
@@ -6,11 +10,11 @@
 
 
 .headerLeft img{
-  width: 250px;
+  width: 240px;
 }
 
 .headerLeft img:nth-child(2){
-  width: 180px;
+  width: 190px;
 }
 
 .logo {

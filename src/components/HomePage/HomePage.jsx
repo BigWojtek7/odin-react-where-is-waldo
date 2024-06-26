@@ -7,6 +7,14 @@ function HomePage() {
         <Link to="/game"><button>Play game</button></Link>
         <Link to="scoreboard"><button>Scoreboard</button></Link>
       </div>
+      <div className={styles.characters}>
+        <h1>Find three characters:</h1>
+        <div className={styles.images}>
+          <img src="waldo.jpg" alt="waldo" />
+          <img src="wizard.gif" alt="wizard" />
+          <img src="odlaw.jpg" alt="odlaw" />
+        </div>
+      </div>
     </div>
   );
 }
