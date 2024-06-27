@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import styles from './Game.module.css';
+import React from 'react';
 
 function Game() {
   const menuBoxRef = useRef(null);
@@ -34,6 +35,9 @@ function Game() {
 
       circleRef.current.style.left = x + 'px';
       circleRef.current.style.top = y + 'px';
+
+      const newCircle = React.createElement('div', { style: { left: x + 'px', top: y + 'px', display: 'block'}, className:`${styles.circle}`, key: y})
+      setCircles([...circles, newCircle ])
     } else {
       menuBoxRef.current.style.display = 'none';
       circleRef.current.style.display = 'none';
@@ -60,6 +64,7 @@ function Game() {
             <button>Odlaw</button>
           </li>
         </ul>
+        {circles}
         <div className={styles.circle} ref={circleRef}></div>
       </div>
     </div>
