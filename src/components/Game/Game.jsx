@@ -1,21 +1,27 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Game.module.css';
 
 function Game() {
   const menuBoxRef = useRef(null);
   const circleRef = useRef(null);
-  const imageRef = useRef(null);
 
-  const toggleMenu = (e) => {
-    e.preventDefault();
+  const [circles, setCircles] = useState([]);
+
+  const getClickCoords = (event) => {
     const bodyRect = document.body.getBoundingClientRect();
-    const bounding = imageRef.current.getBoundingClientRect();
+    const imageRect = event.target.getBoundingClientRect();
 
-    const imagePositionTop = bodyRect.top - bounding.top;
-    const imagePositionLeft = bodyRect.left - bounding.left;
+    const imagePositionTop = bodyRect.top - imageRect.top;
+    const imagePositionLeft = bodyRect.left - imageRect.left;
 
-    const x = e.clientX - bounding.left - imagePositionLeft;
-    const y = e.clientY - bounding.top - imagePositionTop;
+    const x = event.clientX - imageRect.left - imagePositionLeft;
+    const y = event.clientY - imageRect.top - imagePositionTop;
+    return [x, y];
+  };
+
+  const toggleMenu = (event) => {
+    event.preventDefault();
+    const [x, y] = getClickCoords(event);
     if (
       menuBoxRef.current.style.display == 'none' ||
       !menuBoxRef.current.style.display
@@ -39,7 +45,6 @@ function Game() {
       <div className="characters"></div>
       <div className={styles.image}>
         <img
-          ref={imageRef}
           onClick={toggleMenu}
           src="../src/assets/wal_beach.jpg"
           alt="Waldo in the beach"

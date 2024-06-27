@@ -1,3 +1,7 @@
+:root {
+  --circle-width: 40px;
+}
+
 .image img {
   width: 100%;
   position: relative;
@@ -6,7 +10,7 @@
   display: none;
   position: absolute;
 }
-.menuBox li{
+.menuBox li {
   list-style-type: none;
   text-align: center;
 }
@@ -16,19 +20,21 @@
   padding: 3px;
   background-color: #5b92e5;
   font-weight: 700;
-
 }
-.circle{
+.circle {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: var(--circle-width);
+  height: var(--circle-width);
   border: solid 5px rgb(255, 0, 0);
   border-radius: 50px;
   background: rgba(255, 255, 255, 0);
   display: none;
+  transform: translate(
+    calc(var(--circle-width) / 2 * (-1)),
+    calc(var(--circle-width) / 2 * (-1))
+  );
 }
 
-
-.menuBox button:hover{
+.menuBox button:hover {
   background-color: #ff0000;
 }
