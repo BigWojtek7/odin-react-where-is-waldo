@@ -70,19 +70,17 @@ function Game() {
       circleRef.current.style.left = x + 'px';
       circleRef.current.style.top = y + 'px';
 
-      // const newCircle = makeCircle(x, y, 'red');
-      // setCircles([...circles, newCircle]);
     } else {
       menuBoxRef.current.style.display = 'none';
       circleRef.current.style.display = 'none';
     }
   };
-  // console.log(circles[0].props.style.borderColor)
 
-  const waldoClickHandler = (event) => {
+  const onClickMenuBox = (event, name, characterCords) => {
     event.preventDefault();
+    console.log(event, name, characterCords);
     console.log(relativeCords.x);
-    if (relativeCords.x === 62 || relativeCords.x === 11 || relativeCords.x === 27 ) {
+    if (relativeCords.x === characterCords) {
       const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green');
       setCircles([...circles, newCircle]);
     } else {
@@ -91,7 +89,6 @@ function Game() {
     }
     menuBoxRef.current.style.display = 'none';
     circleRef.current.style.display = 'none';
-
   };
 
   return (
@@ -104,15 +101,15 @@ function Game() {
           alt="Waldo in the beach"
         />
         <ul className={styles.menuBox} ref={menuBoxRef}>
-          <li>
-            <button onClick={waldoClickHandler}>Waldo</button>
-          </li>
-          <li>
-            <button>The wizard</button>
-          </li>
-          <li>
-            <button>Odlaw</button>
-          </li>
+          {gameData.map((item, index) => (
+            <li key={index}>
+              <button
+                onClick={(e) => onClickMenuBox(e, item.name, item.coords.x)}
+              >
+                {item.name}
+              </button>
+            </li>
+          ))}
         </ul>
         {circles}
         <div className={styles.circle} ref={circleRef}></div>
