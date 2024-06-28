@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import styles from './Game.module.css';
 import React from 'react';
 
+import Timer from '../Timer/Timer';
+
 function Game() {
   const menuBoxRef = useRef(null);
   const circleRef = useRef(null);
@@ -11,18 +13,22 @@ function Game() {
   const getClickCoords = (event) => {
     const bodyRect = document.body.getBoundingClientRect();
     const imageRect = event.target.getBoundingClientRect();
+    
 
     const imagePositionTop = bodyRect.top - imageRect.top;
     const imagePositionLeft = bodyRect.left - imageRect.left;
 
     const x = event.clientX - imageRect.left - imagePositionLeft;
     const y = event.clientY - imageRect.top - imagePositionTop;
+    console.log(event.nativeEvent.offsetX)
+    console.log(event.nativeEvent.offsetY)
     return [x, y];
   };
 
   const toggleMenu = (event) => {
     event.preventDefault();
     const [x, y] = getClickCoords(event);
+    console.log(x, y)
     if (
       menuBoxRef.current.style.display == 'none' ||
       !menuBoxRef.current.style.display
@@ -36,8 +42,12 @@ function Game() {
       circleRef.current.style.left = x + 'px';
       circleRef.current.style.top = y + 'px';
 
-      const newCircle = React.createElement('div', { style: { left: x + 'px', top: y + 'px', display: 'block'}, className:`${styles.circle}`, key: y})
-      setCircles([...circles, newCircle ])
+      const newCircle = React.createElement('div', {
+        style: { left: x + 'px', top: y + 'px', display: 'block' },
+        className: `${styles.circle}`,
+        key: y,
+      });
+      setCircles([...circles, newCircle]);
     } else {
       menuBoxRef.current.style.display = 'none';
       circleRef.current.style.display = 'none';
@@ -67,6 +77,7 @@ function Game() {
         {circles}
         <div className={styles.circle} ref={circleRef}></div>
       </div>
+      {/* <Timer /> */}
     </div>
   );
 }
