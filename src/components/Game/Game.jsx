@@ -69,8 +69,8 @@ function Game() {
       circleRef.current.style.left = x + 'px';
       circleRef.current.style.top = y + 'px';
 
-      const newCircle = makeCircle(x, y, 'red');
-      setCircles([...circles, newCircle]);
+      // const newCircle = makeCircle(x, y, 'red');
+      // setCircles([...circles, newCircle]);
     } else {
       menuBoxRef.current.style.display = 'none';
       circleRef.current.style.display = 'none';
@@ -79,8 +79,16 @@ function Game() {
 
   const waldoClickHandler = (event) => {
     event.preventDefault();
-    const [x, y] = getClickCoords(event);
-    console.log('2', x, y);
+    console.log(relativeCords.x)
+    if(relativeCords.x === 62){
+      const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green');
+      setCircles([...circles, newCircle]);
+    }else {
+      const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'red');
+      setCircles([...circles, newCircle]);
+    }
+    // const [x, y] = getClickCoords(event);
+    // console.log('2', x, y);
   };
 
   return (
