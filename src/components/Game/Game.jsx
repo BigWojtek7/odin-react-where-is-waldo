@@ -9,26 +9,53 @@ function Game() {
   const circleRef = useRef(null);
 
   const [circles, setCircles] = useState([]);
+  const [pixelCords, setPixelCords] = useState({});
+  const [relativeCords, setRelativeCords] = useState({});
 
   const getClickCoords = (event) => {
     const bodyRect = document.body.getBoundingClientRect();
     const imageRect = event.target.getBoundingClientRect();
-    
 
     const imagePositionTop = bodyRect.top - imageRect.top;
     const imagePositionLeft = bodyRect.left - imageRect.left;
 
     const x = event.clientX - imageRect.left - imagePositionLeft;
     const y = event.clientY - imageRect.top - imagePositionTop;
-    console.log(event.nativeEvent.offsetX)
-    console.log(event.nativeEvent.offsetY)
-    return [x, y];
+
+    //------------------------
+
+    const { width, height } = event.target.getBoundingClientRect();
+    const { offsetX, offsetY } = event.nativeEvent;
+
+    // Cords regardless of screen size/ resolution
+    const relativeCordX = Math.round((offsetX / width) * 100);
+    const relativeCordY = Math.round((offsetY / height) * 100);
+
+    return [x, y, relativeCordX, relativeCordY];
+  };
+
+  const makeCircle = (x, y, color) => {
+    const newCircle = React.createElement('div', {
+      style: {
+        left: x + 'px',
+        top: y + 'px',
+        display: 'block',
+        borderColor: color,
+      },
+      className: `${styles.circle}`,
+      key: x + y,
+    });
+    return newCircle;
   };
 
   const toggleMenu = (event) => {
     event.preventDefault();
-    const [x, y] = getClickCoords(event);
-    console.log(x, y)
+    const [x, y, relX, relY] = getClickCoords(event);
+
+    setPixelCords({ x: x, y: y });
+    setRelativeCords({x: relX, y: relY})
+
+    console.log(pixelCords.x, relativeCords);
     if (
       menuBoxRef.current.style.display == 'none' ||
       !menuBoxRef.current.style.display
@@ -42,16 +69,18 @@ function Game() {
       circleRef.current.style.left = x + 'px';
       circleRef.current.style.top = y + 'px';
 
-      const newCircle = React.createElement('div', {
-        style: { left: x + 'px', top: y + 'px', display: 'block' },
-        className: `${styles.circle}`,
-        key: y,
-      });
+      const newCircle = makeCircle(x, y, 'red');
       setCircles([...circles, newCircle]);
     } else {
       menuBoxRef.current.style.display = 'none';
       circleRef.current.style.display = 'none';
     }
+  };
+
+  const waldoClickHandler = (event) => {
+    event.preventDefault();
+    const [x, y] = getClickCoords(event);
+    console.log('2', x, y);
   };
 
   return (
@@ -65,7 +94,7 @@ function Game() {
         />
         <ul className={styles.menuBox} ref={menuBoxRef}>
           <li>
-            <button>Waldo</button>
+            <button onClick={waldoClickHandler}>Waldo</button>
           </li>
           <li>
             <button>The wizard</button>
