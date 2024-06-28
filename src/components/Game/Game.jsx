@@ -1,8 +1,10 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Game.module.css';
 import React from 'react';
+
 import gameData from '../../../gameData';
 
+import Modal from '../Modal/Modal';
 import Timer from '../Timer/Timer';
 
 function Game() {
@@ -12,6 +14,7 @@ function Game() {
   const [circles, setCircles] = useState([]);
   const [pixelCords, setPixelCords] = useState({});
   const [relativeCords, setRelativeCords] = useState({});
+  const [score, setScore] = useState(0);
 
   const getClickCoords = (event) => {
     const bodyRect = document.body.getBoundingClientRect();
@@ -69,7 +72,6 @@ function Game() {
 
       circleRef.current.style.left = x + 'px';
       circleRef.current.style.top = y + 'px';
-
     } else {
       menuBoxRef.current.style.display = 'none';
       circleRef.current.style.display = 'none';
@@ -83,6 +85,7 @@ function Game() {
     if (relativeCords.x === characterCords) {
       const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green');
       setCircles([...circles, newCircle]);
+      setScore(score + 1);
     } else {
       const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'red');
       setCircles([...circles, newCircle]);
@@ -90,10 +93,12 @@ function Game() {
     menuBoxRef.current.style.display = 'none';
     circleRef.current.style.display = 'none';
   };
+  const charactersToFind = gameData.length;
+  const isWinner = score === charactersToFind;
 
   return (
     <div className="gameboard">
-      <div className="characters"></div>
+      <div >{isWinner && <Modal />}</div>
       <div className={styles.image}>
         <img
           onClick={toggleMenu}

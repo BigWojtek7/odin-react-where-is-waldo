@@ -1,0 +1,41 @@
+.modal {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px 20px;
+  background: linear-gradient(#5b92e5, #ff0000);
+  color: white;
+  font-size: 1.5rem;
+  
+}
+.modal h1{
+  text-align: center;
+}
+
+.modal > * {
+  margin: 10px
+}
+
+.modal::backdrop {
+  backdrop-filter: blur(4px);
+}
+
+.modalForm input{
+  margin: 5px;
+  padding: 3px;
+}
+
+.modalForm button{
+  color: white;
+  background-color: #5b92e5;
+  padding: 10px 20px;
+  cursor: pointer;
+  border:none;
+  border-radius: 5px;
+  font-weight: 700;
+}
+.modalForm button:hover{
+  background-color: #2d78e8;
+  transition: 0.2s;
+}
