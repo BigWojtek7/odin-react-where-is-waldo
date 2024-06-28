@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import styles from './Game.module.css';
 import React from 'react';
+import gameData from '../../../gameData';
 
 import Timer from '../Timer/Timer';
 
@@ -53,7 +54,7 @@ function Game() {
     const [x, y, relX, relY] = getClickCoords(event);
 
     setPixelCords({ x: x, y: y });
-    setRelativeCords({x: relX, y: relY})
+    setRelativeCords({ x: relX, y: relY });
 
     console.log(pixelCords.x, relativeCords);
     if (
@@ -76,19 +77,21 @@ function Game() {
       circleRef.current.style.display = 'none';
     }
   };
+  // console.log(circles[0].props.style.borderColor)
 
   const waldoClickHandler = (event) => {
     event.preventDefault();
-    console.log(relativeCords.x)
-    if(relativeCords.x === 62){
+    console.log(relativeCords.x);
+    if (relativeCords.x === 62 || relativeCords.x === 11 || relativeCords.x === 27 ) {
       const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green');
       setCircles([...circles, newCircle]);
-    }else {
+    } else {
       const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'red');
       setCircles([...circles, newCircle]);
     }
-    // const [x, y] = getClickCoords(event);
-    // console.log('2', x, y);
+    menuBoxRef.current.style.display = 'none';
+    circleRef.current.style.display = 'none';
+
   };
 
   return (
