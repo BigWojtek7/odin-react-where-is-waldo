@@ -119,7 +119,7 @@ function Game() {
         {circles}
         <div className={styles.circle} ref={circleRef}></div>
       </div>
-      {/* <Timer /> */}
+      <Timer score={score}/>
     </div>
   );
 }
