@@ -3,6 +3,7 @@ import styles from './Modal.module.css';
 import Form from './Form';
 function Modal({ time }) {
   const dialogRef = useRef(null);
+  console.log(time, typeof time, 'awqa')
 
   useEffect(() => {
     dialogRef.current.showModal();
