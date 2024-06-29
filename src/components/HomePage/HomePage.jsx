@@ -4,8 +4,12 @@ function HomePage() {
   return (
     <div className={styles.homePage}>
       <div className={styles.menu}>
-        <Link to="/game"><button>Play game</button></Link>
-        <Link to="scoreboard"><button>Scoreboard</button></Link>
+        <Link to="/game">
+          <button>Play game</button>
+        </Link>
+        <Link to="scoreboard">
+          <button>Scoreboard</button>
+        </Link>
       </div>
       <div className={styles.characters}>
         <h1>Find three characters:</h1>

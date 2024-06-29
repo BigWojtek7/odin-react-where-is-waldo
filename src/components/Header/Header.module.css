@@ -1,19 +1,18 @@
-.header{
+.header {
   background-color: red;
 }
 
-.headerLeft .logo{
+.headerLeft .logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
-.headerLeft img{
+.headerLeft img {
   width: 240px;
 }
 
-.headerLeft img:nth-child(2){
+.headerLeft img:nth-child(2) {
   width: 190px;
 }
 
@@ -21,5 +20,3 @@
   font-size: 2.5rem;
   text-decoration: none;
 }
-
-

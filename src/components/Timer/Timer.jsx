@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './Timer.module.css';
-import gameData from '../../../gameData';
+import Modal from '../Modal/Modal';
 
-function Timer({ score }) {
+function Timer({ isWinner }) {
   const [count, setCount] = useState(0);
   const [startTime, setStartTime] = useState(null);
   const [isRunning, setIsRunning] = useState(true);
@@ -22,11 +22,8 @@ function Timer({ score }) {
   }, [startTime, isRunning]);
 
   useEffect(() => {
-    const charactersToFind = gameData.length;
-    const isWinner = score === charactersToFind;
-    if(isWinner) setIsRunning(false)
-
-  },[score])
+    if (isWinner) setIsRunning(false);
+  }, [isWinner]);
 
   const formatTime = (time) => {
     const milliseconds = time % 1000;
@@ -38,7 +35,12 @@ function Timer({ score }) {
       .padStart(2, '0')}:${milliseconds.toString().padStart(3, '0')}`;
   };
 
-  return <div className={styles.timer}>{formatTime(count)}</div>;
+  return (
+    <div>
+      <div className={styles.timer}>{formatTime(count)}</div>
+      <div>{isWinner && <Modal time={formatTime(count)} />}</div>
+    </div>
+  );
 }
 
 export default Timer;

@@ -4,13 +4,13 @@ import React from 'react';
 
 import gameData from '../../../gameData';
 
-import Modal from '../Modal/Modal';
 import Timer from '../Timer/Timer';
 
 function Game() {
   const menuBoxRef = useRef(null);
   const circleRef = useRef(null);
 
+  const [isWinner, setIsWinner] = useState(false);
   const [circles, setCircles] = useState([]);
   const [pixelCords, setPixelCords] = useState({});
   const [relativeCords, setRelativeCords] = useState({});
@@ -26,12 +26,13 @@ function Game() {
     const x = event.clientX - imageRect.left - imagePositionLeft;
     const y = event.clientY - imageRect.top - imagePositionTop;
 
-    //------------------------
+    
+    // Coords regardless of screen size resolution
 
     const { width, height } = event.target.getBoundingClientRect();
     const { offsetX, offsetY } = event.nativeEvent;
 
-    // Cords regardless of screen size/ resolution
+    
     const relativeCordX = Math.round((offsetX / width) * 100);
     const relativeCordY = Math.round((offsetY / height) * 100);
 
@@ -93,12 +94,14 @@ function Game() {
     menuBoxRef.current.style.display = 'none';
     circleRef.current.style.display = 'none';
   };
-  const charactersToFind = gameData.length;
-  const isWinner = score === charactersToFind;
+
+  useEffect(() => {
+    const charactersToFind = gameData.length;
+    setIsWinner(score === charactersToFind);
+  }, [score]);
 
   return (
     <div className="gameboard">
-      <div >{isWinner && <Modal />}</div>
       <div className={styles.image}>
         <img
           onClick={toggleMenu}
@@ -119,7 +122,7 @@ function Game() {
         {circles}
         <div className={styles.circle} ref={circleRef}></div>
       </div>
-      <Timer score={score}/>
+      <Timer isWinner={isWinner} />
     </div>
   );
 }
