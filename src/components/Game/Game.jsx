@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Game.module.css';
 import React from 'react';
 
+import waldoBeach from '../../assets/wal_beach.jpg';
+
 import gameData from '../../../gameData';
 
 import Timer from '../Timer/Timer';
@@ -26,13 +28,11 @@ function Game() {
     const x = event.clientX - imageRect.left - imagePositionLeft;
     const y = event.clientY - imageRect.top - imagePositionTop;
 
-    
     // Coords regardless of screen size resolution
 
     const { width, height } = event.target.getBoundingClientRect();
     const { offsetX, offsetY } = event.nativeEvent;
 
-    
     const relativeCordX = Math.round((offsetX / width) * 100);
     const relativeCordY = Math.round((offsetY / height) * 100);
 
@@ -103,11 +103,7 @@ function Game() {
   return (
     <div className="gameboard">
       <div className={styles.image}>
-        <img
-          onClick={toggleMenu}
-          src="../src/assets/wal_beach.jpg"
-          alt="Waldo in the beach"
-        />
+        <img onClick={toggleMenu} src={waldoBeach} alt="Waldo in the beach" />
         <ul className={styles.menuBox} ref={menuBoxRef}>
           {gameData.map((item, index) => (
             <li key={index}>
