@@ -79,14 +79,14 @@ function Game() {
       circleRef.current.style.display = 'none';
     }
   };
-
+  console.log(relativeCords.x, relativeCords.y);
   const onClickMenuBox = (event, name, characterCoordX, characterCoordY) => {
     event.preventDefault();
-    console.log(event, name, characterCoordX);
-    console.log(relativeCords.x);
+    const toleranceY = characterCoordY + 1;
+
     if (
       relativeCords.x === characterCoordX &&
-      relativeCords.y === characterCoordY
+      (relativeCords.y === characterCoordY || relativeCords.y === toleranceY)
     ) {
       const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green', 'auto');
       setCircles([...circles, newCircle]);
