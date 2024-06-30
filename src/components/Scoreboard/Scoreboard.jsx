@@ -6,21 +6,30 @@ function Scoreboard() {
 
   useEffect(() => {
     const fetchScores = async () => {
-      let response;
       try {
-        response = await fetch('');
+        const response = await fetch('http://localhost:3000/scores');
+        if (response.ok) {
+          const data = await response.json();
+          setScores(data);
+          return data;
+        } else {
+          if (response.status === 404) throw new Error('404, Not found');
+          if (response.status === 500)
+            throw new Error('500, internal server error');
+          // For any other server error
+          throw new Error(response.status);
+        }
       } catch (err) {
-        console.log(err);
+        console.error('Fetch', err);
       }
-      const data = await response.json();
-      setScores(data);
     };
     fetchScores();
   }, []);
+  console.log(scores);
 
   return (
     <div className={styles.scoreboard}>
-      <h1>Scores:</h1>
+      <h1>Scoreboard</h1>
       <table className={styles.scoreTable}>
         <thead>
           <tr>
@@ -30,11 +39,13 @@ function Scoreboard() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Walter</td>
-            <td>00:12:222</td>
-          </tr>
+          {scores.map((score, index) => (
+            <tr key={score._id}>
+              <td>{index + 1}</td>
+              <td>{score.username}</td>
+              <td>{score.time}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

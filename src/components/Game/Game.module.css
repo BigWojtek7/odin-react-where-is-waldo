@@ -23,7 +23,6 @@
 }
 .circle {
   position: absolute;
-  pointer-events: none;
   width: var(--circle-width);
   height: var(--circle-width);
   border: solid 5px rgb(255, 0, 0);

@@ -39,13 +39,14 @@ function Game() {
     return [x, y, relativeCordX, relativeCordY];
   };
 
-  const makeCircle = (x, y, color) => {
+  const makeCircle = (x, y, color, pointer = 'none') => {
     const newCircle = React.createElement('div', {
       style: {
         left: x + 'px',
         top: y + 'px',
         display: 'block',
         borderColor: color,
+        pointerEvents: pointer,
       },
       className: `${styles.circle}`,
       key: x + y,
@@ -79,12 +80,15 @@ function Game() {
     }
   };
 
-  const onClickMenuBox = (event, name, characterCords) => {
+  const onClickMenuBox = (event, name, characterCoordX, characterCoordY) => {
     event.preventDefault();
-    console.log(event, name, characterCords);
+    console.log(event, name, characterCoordX);
     console.log(relativeCords.x);
-    if (relativeCords.x === characterCords) {
-      const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green');
+    if (
+      relativeCords.x === characterCoordX &&
+      relativeCords.y === characterCoordY
+    ) {
+      const newCircle = makeCircle(pixelCords.x, pixelCords.y, 'green', 'auto');
       setCircles([...circles, newCircle]);
       setScore(score + 1);
     } else {
@@ -108,7 +112,9 @@ function Game() {
           {gameData.map((item, index) => (
             <li key={index}>
               <button
-                onClick={(e) => onClickMenuBox(e, item.name, item.coords.x)}
+                onClick={(e) =>
+                  onClickMenuBox(e, item.name, item.coords.x, item.coords.y)
+                }
               >
                 {item.name}
               </button>
