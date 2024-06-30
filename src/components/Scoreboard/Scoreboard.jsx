@@ -7,7 +7,7 @@ function Scoreboard() {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const response = await fetch('http://localhost:3000/scores');
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scores`);
         if (response.ok) {
           const data = await response.json();
           setScores(data);

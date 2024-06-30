@@ -1,12 +1,12 @@
 .scoreboard h1 {
   text-align: center;
-  margin: 30px;
+  margin: 20px;
   color: red;
   font-size: 3rem;
 }
 
 .scoreTable{
-  margin: 0 auto;
+  margin: 20px auto;
   border-collapse: collapse;
   font-size: 2rem;
 }
