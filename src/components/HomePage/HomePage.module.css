@@ -1,3 +1,8 @@
+.homepage{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
 .menu {
   display: flex;
@@ -37,6 +42,6 @@
   gap: 50px;
 }
 .images img{
-  height: 250px;
+  max-height: 350px;
 }
 

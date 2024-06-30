@@ -25,7 +25,6 @@ function Scoreboard() {
     };
     fetchScores();
   }, []);
-  console.log(scores);
 
   return (
     <div className={styles.scoreboard}>

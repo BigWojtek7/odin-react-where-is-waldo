@@ -61,7 +61,6 @@ function Game() {
     setPixelCords({ x: x, y: y });
     setRelativeCords({ x: relX, y: relY });
 
-    console.log(pixelCords.x, relativeCords);
     if (
       menuBoxRef.current.style.display == 'none' ||
       !menuBoxRef.current.style.display
@@ -79,7 +78,7 @@ function Game() {
       circleRef.current.style.display = 'none';
     }
   };
-  console.log(relativeCords.x, relativeCords.y);
+  
   const onClickMenuBox = (event, name, characterCoordX, characterCoordY) => {
     event.preventDefault();
     const toleranceY = characterCoordY + 1;
