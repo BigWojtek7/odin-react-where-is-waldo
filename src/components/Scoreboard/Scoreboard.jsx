@@ -3,14 +3,17 @@ import styles from './Scoreboard.module.css';
 import { useState, useEffect } from 'react';
 function Scoreboard() {
   const [scores, setScores] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchScores = async () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/scores`);
         if (response.ok) {
           const data = await response.json();
           setScores(data);
+          setIsLoading(false)
           return data;
         } else {
           if (response.status === 404) throw new Error('404, Not found');
@@ -28,7 +31,8 @@ function Scoreboard() {
 
   return (
     <div className={styles.scoreboard}>
-      <h1>Scoreboard</h1>
+      
+      <h1>{isLoading ? 'Loading...' : 'Scoreboard'}</h1>
       <table className={styles.scoreTable}>
         <thead>
           <tr>
